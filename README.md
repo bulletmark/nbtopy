@@ -109,7 +109,7 @@ usage: nbtopy [-h] [-m] [-M] [-c] [-e] [-x] [-f] [-r] [-p] [-q] [-w]
 Converts Jupyter notebook file[s] to Python (interactive) file[s].
 
 positional arguments:
-  ipynb_path            input ipynb file (dir for *.ipynb files)
+  ipynb_path            input ipynb file[s] (or dir for all *.ipynb files)
 
 options:
   -h, --help            show this help message and exit
