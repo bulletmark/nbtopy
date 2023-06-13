@@ -29,8 +29,12 @@ def write_file(opath: Path, out: str, args: Namespace) -> Union[bool, None]:
 
     return True if exists else None
 
+convert_first = True
+
 def convert_file(ipath: Path, dirout: Path, args: Namespace) -> bool:
     'Convert given input file'
+    global convert_first
+
     if args.out:
         if args.out == '-':
             opath = None
@@ -74,9 +78,9 @@ def convert_file(ipath: Path, dirout: Path, args: Namespace) -> bool:
         return False
 
     out = []
-    if not args.out or convert_file.first:
+    if not args.out or convert_first:
         out.append('#!/usr/bin/env python3')
-        convert_file.first = False
+        convert_first = False
 
     out.append(f'\n## Built from {ipath} by {PROG} ##\n')
 
@@ -167,8 +171,6 @@ def convert_file(ipath: Path, dirout: Path, args: Namespace) -> bool:
 
     return True
 
-convert_file.first = True
-
 def convert_dir(ipath: Path, dirout: Path, args: Namespace) -> int:
     'Convert files in given input dir'
     count = 0
@@ -215,12 +217,13 @@ def main() -> None:
 
     # Merge in default args from user config file. Then parse the
     # command line.
-    cnflines = ''
     cnffile = CNFFILE.expanduser()
     if cnffile.exists():
         with cnffile.open() as fp:
-            cnflines = [re.sub(r'#.*$', '', line).strip() for line in fp]
-        cnflines = ' '.join(cnflines).strip()
+            lines = [re.sub(r'#.*$', '', line).strip() for line in fp]
+        cnflines = ' '.join(lines).strip()
+    else:
+        cnflines = ''
 
     args = opt.parse_args(shlex.split(cnflines) + sys.argv[1:])
 
