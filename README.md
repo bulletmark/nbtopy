@@ -70,27 +70,17 @@ Arch users can install [nbtopy from the AUR](https://aur.archlinux.org/packages/
 
 Python 3.6 or later is required. Note [nbtopy is on
 PyPI](https://pypi.org/project/nbtopy/) so just ensure that
-`python3-pip` and `python3-wheel` are installed then type the following
-to install (or upgrade):
+[`pipx`](https://pypa.github.io/pipx/) is installed then type the
+following:
 
 ```
-$ sudo pip3 install -U nbtopy
+$ pipx install nbtopy
 ```
 
-Or, to install from this source repository:
+To upgrade:
 
 ```
-$ git clone http://github.com/bulletmark/nbtopy
-$ cd nbtopy
-$ sudo pip3 install -U .
-```
-
-To upgrade from the source repository:
-
-```
-$ cd nbtopy # i.e. to git source dir above
-$ git pull
-$ sudo pip3 install -U .
+$ pipx upgrade nbtopy
 ```
 
 This program runs on pure Python. No 3rd party packages are required.
