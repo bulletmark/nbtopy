@@ -212,7 +212,9 @@ def main() -> None:
     opt.add_argument('-d', '--dir', default='.',
             help='output directory, default = ".". Specify absolute path '
             'to create separate tree of output files')
-    opt.add_argument('ipynb_path', nargs='+',
+    opt.add_argument('-V', '--version', action='store_true',
+            help=f'show {PROG} version')
+    opt.add_argument('ipynb_path', nargs='*',
             help='input ipynb file[s] (or dir for all *.ipynb files)')
 
     # Merge in default args from user config file. Then parse the
@@ -226,6 +228,23 @@ def main() -> None:
         cnflines = ''
 
     args = opt.parse_args(shlex.split(cnflines) + sys.argv[1:])
+
+    if args.version:
+        if sys.version_info >= (3, 8):
+            from importlib.metadata import version
+        else:
+            from importlib_metadata import version
+
+        try:
+            ver = version(PROG)
+        except Exception:
+            ver = 'unknown'
+
+        print(ver)
+        return
+
+    if not args.ipynb_path:
+        opt.error('Must specify one or more ipynb files')
 
     dirout = Path(args.dir)
 

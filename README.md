@@ -66,7 +66,8 @@ installed.
 
 ## Installation or Upgrade
 
-Arch users can install [nbtopy from the AUR](https://aur.archlinux.org/packages/nbtopy/).
+Arch users can install [nbtopy from the
+AUR](https://aur.archlinux.org/packages/nbtopy/).
 
 Python 3.6 or later is required. Note [nbtopy is on
 PyPI](https://pypi.org/project/nbtopy/) so just ensure that
@@ -93,8 +94,8 @@ Type `nbtopy -h` to view the usage summary:
 
 ```
 usage: nbtopy [-h] [-m] [-M] [-c] [-e] [-x] [-f] [-r] [-p] [-q] [-w]
-                 [-o OUT] [-d DIR]
-                 ipynb_path [ipynb_path ...]
+                 [-o OUT] [-d DIR] [-V]
+                 [ipynb_path ...]
 
 Converts Jupyter notebook file[s] to Python (interactive) file[s].
 
@@ -118,6 +119,7 @@ options:
   -o OUT, --out OUT     alternative output file name, or '-' for stdout
   -d DIR, --dir DIR     output directory, default = ".". Specify absolute path
                         to create separate tree of output files
+  -V, --version         show nbtopy version
 
 Note you can set default options in ~/.config/nbtopy-flags.conf.
 ```
