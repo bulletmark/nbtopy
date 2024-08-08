@@ -2,6 +2,7 @@
 'Converts Jupyter notebook file[s] to Python (interactive) file[s].'
 # Author: Mark Blakeney, May 2022.
 
+from __future__ import annotations
 import os
 import sys
 import json
@@ -9,7 +10,6 @@ import shlex
 import re
 from argparse import ArgumentParser, Namespace
 from pathlib import Path
-from typing import Union
 
 # Some constants
 CODETAG = '# %%\n'
@@ -18,7 +18,7 @@ CMNTTAG = '# '
 PROG = Path(sys.argv[0]).stem
 CNFFILE = Path(os.getenv('XDG_CONFIG_HOME', '~/.config'), f'{PROG}-flags.conf')
 
-def write_file(opath: Path, out: str, args: Namespace) -> Union[bool, None]:
+def write_file(opath: Path, out: str, args: Namespace) -> bool | None:
     # check if new file has not changed
     exists = opath.exists()
     if exists and opath.read_text() == out:
@@ -185,7 +185,7 @@ def convert_dir(ipath: Path, dirout: Path, args: Namespace) -> int:
 
 def main() -> None:
     # Process command line options
-    opt = ArgumentParser(description=__doc__.strip(),
+    opt = ArgumentParser(description=__doc__,
             epilog=f'Note you can set default options in {CNFFILE}.')
     opt.add_argument('-m', '--no-markdown-tag', action='store_true',
             help='do not add markdown tag on markdown cells')
